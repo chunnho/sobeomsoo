@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import styles from './home.module.scss';
+import { useState } from "react";
+import styles from "./home.module.scss";
 import {
   FullpageContainer,
   FullpageSection,
-} from '@shinyongjun/react-fullpage';
-import '@shinyongjun/react-fullpage/css';
-import Footer from '@/layout/footer/footer';
-import About from './components/about/about';
-import Works from './components/works/works';
-import Exhibition from './components/exhibition/exhibition';
-import Masterpiece from './components/masterpiece/masterpiece';
+} from "@shinyongjun/react-fullpage";
+import "@shinyongjun/react-fullpage/css";
+import Footer from "@/layout/footer/footer";
+import About from "./components/about/about";
+import Works from "./components/works/works";
+import Exhibition from "./components/exhibition/exhibition";
+import Masterpiece from "./components/masterpiece/masterpiece";
 
 function Home() {
   const [activeFullpageIndex, setActiveFullpageIndex] = useState<number>(0);
@@ -27,10 +27,10 @@ function Home() {
           />
         </FullpageSection>
         <FullpageSection>
-          <Works />
+          <Works activeFullpageIndex={activeFullpageIndex} />
         </FullpageSection>
         <FullpageSection>
-          <Exhibition />
+          <Exhibition activeFullpageIndex={activeFullpageIndex} />
         </FullpageSection>
         <FullpageSection>
           <About />

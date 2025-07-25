@@ -1,5 +1,9 @@
 .wrapper {
+  font-size: 0.7em;
+  color: $primary2;
   width: 100%;
-  height: 4rem;
-  border: 1px solid black;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

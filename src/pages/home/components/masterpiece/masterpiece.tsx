@@ -1,17 +1,17 @@
-import MobileImage from '@/components/mobileImage/mobileImage';
-import styles from './masterpiece.module.scss';
-import streetImage from '@/assets/street.webp';
-import grandImage from '@/assets/grand.webp';
-import soniaImage from '@/assets/sonia.webp';
-import riverImage from '@/assets/river.webp';
-import { motion } from 'framer-motion';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import MobileImage from "@/components/mobileImage/mobileImage";
+import styles from "./masterpiece.module.scss";
+import streetImage from "@/assets/street.webp";
+import grandImage from "@/assets/grand.webp";
+import soniaImage from "@/assets/sonia.webp";
+import riverImage from "@/assets/river.webp";
+import { motion } from "framer-motion";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
 
 // Swiper CSS
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 
 interface MasterpieceProps {
   activeFullpageIndex: number;
@@ -25,16 +25,17 @@ interface ContentItem {
 
 // 여러 이미지 데이터 추가
 const IMAGE_DATA = [
-  { id: 1, src: streetImage, alt: 'Street Scene' },
-  { id: 2, src: grandImage, alt: 'Area View' },
-  { id: 3, src: soniaImage, alt: 'Forest' },
-  { id: 4, src: riverImage, alt: 'River' },
+  { id: 1, src: streetImage, alt: "Street Scene" },
+  { id: 2, src: grandImage, alt: "Area View" },
+  { id: 3, src: soniaImage, alt: "Forest" },
+  { id: 4, src: riverImage, alt: "River" },
 ];
 
 const CONTENT_ITEMS: ContentItem[] = [
-  { id: 0, label: 'CV' },
-  { id: 1, label: 'Works' },
-  { id: 2, label: 'Exhibition' },
+  { id: 0, label: "Hilights" },
+  { id: 1, label: "Works" },
+  { id: 2, label: "Exhibition" },
+  { id: 3, label: "CV" },
 ];
 
 export default function Masterpiece({
@@ -46,7 +47,7 @@ export default function Masterpiece({
   };
 
   const getItemClassName = (index: number) => {
-    return activeFullpageIndex === index ? styles.active : '';
+    return activeFullpageIndex === index ? styles.active : "";
   };
 
   return (
