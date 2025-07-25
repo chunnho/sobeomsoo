@@ -3,5 +3,16 @@
     width: 100%;
     height: auto;
     object-fit: contain;
+    transition: filter 0.3s ease-in-out;
+
+    &.loading {
+      filter: blur(10px);
+      transform: scale(1.1);
+    }
+
+    &.loaded {
+      filter: blur(0);
+      transform: scale(1);
+    }
   }
 }
