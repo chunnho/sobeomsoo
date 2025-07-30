@@ -56,25 +56,23 @@ export default function Masterpiece({
         className={styles.title}
         initial={{ opacity: 0, y: 10 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
+        transition={{ duration: 0.5, delay: 0.5 }}
       >
         So, Beomsoo
       </motion.div>
-      <motion.div
-        className={styles.content_list}
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.75, delay: 0.5 }}
-      >
-        {CONTENT_ITEMS.map((item) => (
-          <button
+      <motion.div className={styles.content_list}>
+        {CONTENT_ITEMS.map((item, index) => (
+          <motion.button
             key={item.id}
             className={`${styles.content_item} ${getItemClassName(item.id)}`}
             onClick={() => handleItemClick(item.id)}
             type="button"
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 + index * 0.18 }}
           >
             {item.label}
-          </button>
+          </motion.button>
         ))}
       </motion.div>
 
@@ -82,7 +80,7 @@ export default function Masterpiece({
         className={styles.image_wrapper}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 2 }}
+        transition={{ duration: 1, delay: 1.5 }}
       >
         <Swiper
           modules={[Autoplay]}

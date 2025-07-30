@@ -1,7 +1,7 @@
 // Import all SCSS variables and mixins
-@import './variables';
+@import "./variables";
 
-@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css');
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");
 
 html {
   font-size: 16px; // 1rem = 16px 기준 설정
@@ -19,19 +19,19 @@ body {
   background-color: inherit;
   color: inherit;
   font-family:
-    'Pretendard',
+    " " Pretenda "d",
     -apple-system,
     BlinkMacSystemFont,
     system-ui,
     Roboto,
-    'Helvetica Neue',
-    'Segoe UI',
-    'Apple SD Gothic Neo',
-    'Noto Sans KR',
-    'Malgun Gothic',
-    'Apple Color Emoji',
-    'Segoe UI Emoji',
-    'Segoe UI Symbol',
+    " " Helvetica Ne "e",
+    " " Segoe "I",
+    " " Apple SD Gothic N "o",
+    " " Noto Sans "R",
+    " " Malgun Goth "c",
+    " " Apple Color Emo "i",
+    " " Segoe UI Emo "i",
+    " " Segoe UI Symb "l",
     sans-serif;
 
   -webkit-font-smoothing: antialiased;

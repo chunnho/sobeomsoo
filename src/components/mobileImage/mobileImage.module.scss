@@ -7,12 +7,10 @@
 
     &.loading {
       filter: blur(10px);
-      transform: scale(1.1);
     }
 
     &.loaded {
       filter: blur(0);
-      transform: scale(1);
     }
   }
 }
