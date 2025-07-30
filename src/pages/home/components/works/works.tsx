@@ -29,7 +29,6 @@ import windowImage from "@/assets/window.webp";
 import MobileImage from "@/components/mobileImage/mobileImage";
 import Tab, { TabItem } from "@/components/tab/tab";
 import { useState } from "react";
-import classNames from "classnames";
 
 const IMAGE_DATA = [
   {
@@ -216,7 +215,7 @@ export default function Works({ activeFullpageIndex }: ImageItemProps) {
             variants={imageItemAnimation}
             initial="initial"
             whileInView="animate"
-            viewport={{ once: true, margin: "-50px" }}
+            viewport={{ once: true, margin: "-20px" }}
             //@ts-ignore
             transition={imageItemTransition}
           >
