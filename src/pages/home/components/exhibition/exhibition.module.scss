@@ -36,3 +36,34 @@
     }
   }
 }
+
+// 모달 내용 스타일
+.modalContent {
+  .modalSection {
+    margin-bottom: 1.5rem;
+
+    .description {
+      height: 15rem;
+      overflow-y: scroll;
+      white-space: pre-wrap;
+    }
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $primary1;
+      margin: 0 0 0.5rem 0;
+    }
+
+    p {
+      font-size: 0.9rem;
+      color: $primary2;
+      line-height: 1.6;
+      margin: 0;
+    }
+  }
+}

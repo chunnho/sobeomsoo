@@ -18,6 +18,8 @@ import meme1Image from "@/assets/meme_1.webp";
 import meme2Image from "@/assets/meme_2.webp";
 import meme3Image from "@/assets/meme_3.webp";
 import MobileImage from "@/components/mobileImage/mobileImage";
+import Modal from "@/components/modal/modal";
+import { EXHIBITION_DETAILS } from "./constant";
 
 interface ImageItemProps {
   activeFullpageIndex: number;
@@ -119,9 +121,16 @@ export default function Exhibition({
   setActiveFullpageIndex,
 }: ImageItemProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const currentImageData = IMAGE_DATA.filter((item) => {
     return item.type === TAB_ITEMS[activeTab].title;
   });
+
+  const currentExhibition =
+    EXHIBITION_DETAILS[
+      TAB_ITEMS[activeTab].title as keyof typeof EXHIBITION_DETAILS
+    ];
 
   return (
     <div className={styles.wrapper}>
@@ -141,11 +150,9 @@ export default function Exhibition({
 
       <motion.button
         className={styles.scroll_to_bottom}
-        onClick={() => {
-          setActiveFullpageIndex(3);
-        }}
+        onClick={() => setIsModalOpen(true)}
       >
-        Move to CV
+        {`${TAB_ITEMS[activeTab].title} Details`}
       </motion.button>
 
       <motion.div
@@ -168,6 +175,32 @@ export default function Exhibition({
           </motion.div>
         ))}
       </motion.div>
+
+      {/* 전시 상세 정보 모달 */}
+      <Modal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        title={currentExhibition.title}
+      >
+        <div className={styles.modalContent}>
+          <div className={styles.modalSection}>
+            <h3>전시 기간</h3>
+            <p>{currentExhibition.period}</p>
+          </div>
+
+          <div className={styles.modalSection}>
+            <h3>전시 장소</h3>
+            <p>{currentExhibition.location}</p>
+          </div>
+
+          <div className={styles.modalSection}>
+            <h3>서사</h3>
+            <p className={styles.description}>
+              {currentExhibition.description}
+            </p>
+          </div>
+        </div>
+      </Modal>
     </div>
   );
 }
