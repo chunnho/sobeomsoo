@@ -5,18 +5,19 @@ interface MobileImageProps {
   src: string;
   alt?: string;
   className?: string;
+  priority?: boolean; // 우선순위 이미지 (즉시 로드)
 }
 
-export default function MobileImage({ src, alt, className }: MobileImageProps) {
+export default function MobileImage({ src, alt, className, priority = false }: MobileImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
-  const [isInView, setIsInView] = useState(false);
+  const [isInView, setIsInView] = useState(priority); // priority가 true면 즉시 true
   const [hasError, setHasError] = useState(false);
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer로 뷰포트 진입 감지
+  // Intersection Observer로 뷰포트 진입 감지 (priority가 false일 때만)
   useEffect(() => {
-    if (!containerRef.current) return;
+    if (priority || !containerRef.current) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -34,7 +35,7 @@ export default function MobileImage({ src, alt, className }: MobileImageProps) {
     observer.observe(containerRef.current);
 
     return () => observer.disconnect();
-  }, []);
+  }, [priority]);
 
   const handleLoad = () => {
     setIsLoaded(true);
@@ -47,8 +48,8 @@ export default function MobileImage({ src, alt, className }: MobileImageProps) {
 
   return (
     <div ref={containerRef} className={`${styles.wrapper} ${className || ""}`}>
-      {/* 스켈레톤 로딩 */}
-      {!isInView && (
+      {/* 스켈레톤 로딩 (priority가 false일 때만) */}
+      {!isInView && !priority && (
         <div className={styles.skeleton} />
       )}
       
@@ -58,7 +59,7 @@ export default function MobileImage({ src, alt, className }: MobileImageProps) {
           ref={imgRef}
           src={src}
           alt={alt || ""}
-          loading="lazy"
+          loading={priority ? "eager" : "lazy"}
           className={`${styles.image} ${isLoaded ? styles.loaded : styles.loading}`}
           onLoad={handleLoad}
           onError={handleError}

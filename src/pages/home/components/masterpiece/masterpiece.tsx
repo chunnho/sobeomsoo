@@ -139,6 +139,7 @@ export default function Masterpiece({
                 src={image.src}
                 alt={image.alt}
                 className={styles.image}
+                priority={true}
               />
               <div className={styles.desc}>
                 {IMAGE_DATA[swiperActiveIdx].desc}
