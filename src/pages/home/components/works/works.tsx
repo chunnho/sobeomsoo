@@ -1,6 +1,14 @@
 import styles from "./works.module.scss";
 import { motion } from "framer-motion";
 import areaImage from "@/assets/area.webp";
+
+// Animation configurations
+import {
+  getConditionalAnimation,
+  getConditionalImageListAnimation,
+  imageItemAnimation,
+  imageItemTransition,
+} from "./anim";
 import damnImage from "@/assets/damn.webp";
 import fenceImage from "@/assets/fence.webp";
 import flower1Image from "@/assets/flower1.webp";
@@ -19,7 +27,9 @@ import treeImage from "@/assets/tree.webp";
 import watermelonImage from "@/assets/watermelon.webp";
 import windowImage from "@/assets/window.webp";
 import MobileImage from "@/components/mobileImage/mobileImage";
+import Tab, { TabItem } from "@/components/tab/tab";
 import { useState } from "react";
+import classNames from "classnames";
 
 const IMAGE_DATA = [
   {
@@ -150,7 +160,7 @@ const IMAGE_DATA = [
   },
 ];
 
-const TAB_ITEMS = [
+const TAB_ITEMS: TabItem[] = [
   {
     id: 0,
     title: "ALL",
@@ -175,38 +185,44 @@ interface ImageItemProps {
 
 export default function Works({ activeFullpageIndex }: ImageItemProps) {
   const [activeTab, setActiveTab] = useState(0);
+  const currentImageList = IMAGE_DATA.filter((image) => {
+    if (activeTab === 0) return true;
+    return image.year === Number(TAB_ITEMS[activeTab].title);
+  });
   return (
     <div className={styles.wrapper}>
       <motion.div
         className={styles.title}
-        initial={{ opacity: 0, y: 10 }}
-        animate={
-          activeFullpageIndex === 1
-            ? { opacity: 1, y: 0 }
-            : { opacity: 0, y: 10 }
-        }
-        transition={{ duration: 0.5, delay: 0.65 }}
+        {...getConditionalAnimation(activeFullpageIndex === 1)}
       >
-        Works
+        WORKS
       </motion.div>
 
-      <div className={styles.tab_wrapper}>
-        <div className={styles.tab_item}>
-          <div className={styles.tab_item_title}>Works</div>
-        </div>
-      </div>
+      <Tab
+        items={TAB_ITEMS}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
+        isVisible={activeFullpageIndex === 1}
+      />
 
       <motion.div
         className={styles.image_list}
-        initial={{ opacity: 0 }}
-        animate={activeFullpageIndex === 1 ? { opacity: 1 } : { opacity: 0 }}
-        transition={{ duration: 1.5, delay: 0.65 }}
+        {...getConditionalImageListAnimation(activeFullpageIndex === 1)}
       >
-        {IMAGE_DATA.map((image) => (
-          <div key={image.id} className={styles.image_item}>
+        {currentImageList.map((image) => (
+          <motion.div
+            key={image.id}
+            className={styles.image_item}
+            variants={imageItemAnimation}
+            initial="initial"
+            whileInView="animate"
+            viewport={{ once: true, margin: "-50px" }}
+            //@ts-ignore
+            transition={imageItemTransition}
+          >
             <MobileImage src={image.src} alt={image.alt} />
             <div className={styles.desc}>{image.desc}</div>
-          </div>
+          </motion.div>
         ))}
       </motion.div>
     </div>

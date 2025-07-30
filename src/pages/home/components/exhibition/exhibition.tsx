@@ -18,7 +18,7 @@ export default function Exhibition({ activeFullpageIndex }: ImageItemProps) {
         }
         transition={{ duration: 0.5, delay: 0.65 }}
       >
-        Exhibition
+        EXHIBITION
       </motion.div>
     </div>
   );

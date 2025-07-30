@@ -14,6 +14,16 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { useState } from "react";
 
+// Animation configurations
+import {
+  titleAnimation,
+  titleTransition,
+  contentItemAnimation,
+  getContentItemTransition,
+  imageWrapperAnimation,
+  imageWrapperTransition,
+} from "./anim";
+
 interface MasterpieceProps {
   activeFullpageIndex: number;
   setActiveFullpageIndex: (index: number) => void;
@@ -24,7 +34,6 @@ interface ContentItem {
   label: string;
 }
 
-// 여러 이미지 데이터 추가
 const IMAGE_DATA = [
   {
     id: 0,
@@ -80,9 +89,10 @@ export default function Masterpiece({
     <div className={styles.wrapper}>
       <motion.div
         className={styles.title}
-        initial={{ opacity: 0, y: 10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5, delay: 0.5 }}
+        variants={titleAnimation}
+        initial="initial"
+        animate="animate"
+        transition={titleTransition}
       >
         So, Beomsoo
       </motion.div>
@@ -93,9 +103,10 @@ export default function Masterpiece({
             className={`${styles.content_item} ${getItemClassName(item.id)}`}
             onClick={() => handleItemClick(item.id)}
             type="button"
-            initial={{ opacity: 0, y: 15 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 + index * 0.18 }}
+            variants={contentItemAnimation}
+            initial="initial"
+            animate="animate"
+            transition={getContentItemTransition(index)}
           >
             {item.label}
           </motion.button>
@@ -104,9 +115,10 @@ export default function Masterpiece({
 
       <motion.div
         className={styles.image_wrapper}
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.5 }}
+        variants={imageWrapperAnimation}
+        initial="initial"
+        animate="animate"
+        transition={imageWrapperTransition}
       >
         <Swiper
           modules={[Autoplay]}

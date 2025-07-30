@@ -6,17 +6,13 @@
   align-items: center;
 
   & > .title {
+    margin-bottom: 1.2rem;
     font-size: 1.6rem;
     font-weight: 400;
     color: $primary1;
   }
 
-  .tab_wrapper {
-    border: 1px solid red;
-  }
-
   & > .image_list {
-    margin-top: 3.2rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.6rem;
