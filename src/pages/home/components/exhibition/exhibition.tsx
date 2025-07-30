@@ -23,7 +23,3 @@ export default function Exhibition({ activeFullpageIndex }: ImageItemProps) {
     </div>
   );
 }
-
-//이미지 최적화
-//폰트 적용
-//뷰에 들어왔을때 처리 안됨
