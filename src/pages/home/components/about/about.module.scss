@@ -33,6 +33,8 @@
 
         & > p,
         & > a {
+          width: 18rem;
+          white-space: pre-wrap;
           line-height: 0.8rem;
           color: $primary2;
           font-size: 0.7rem;
@@ -49,5 +51,19 @@
         }
       }
     }
+  }
+}
+
+@media (min-width: $tablet) {
+  .wrapper {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+}
+
+@media (min-width: $desktop) {
+  .wrapper {
+    padding-left: 30rem;
+    padding-right: 30rem;
   }
 }
