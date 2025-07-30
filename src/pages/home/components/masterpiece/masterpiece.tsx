@@ -12,6 +12,7 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import { useState } from "react";
 
 interface MasterpieceProps {
   activeFullpageIndex: number;
@@ -25,10 +26,34 @@ interface ContentItem {
 
 // 여러 이미지 데이터 추가
 const IMAGE_DATA = [
-  { id: 1, src: streetImage, alt: "Street Scene" },
-  { id: 2, src: grandImage, alt: "Area View" },
-  { id: 3, src: soniaImage, alt: "Forest" },
-  { id: 4, src: riverImage, alt: "River" },
+  {
+    id: 0,
+    year: 2024,
+    src: streetImage,
+    alt: "Street Scene",
+    desc: "<25th Street>, 2024. Oil on canvas, 117x91cm.",
+  },
+  {
+    id: 1,
+    year: 2023,
+    src: grandImage,
+    alt: "Area View",
+    desc: "<Grand Cross>, 2023. Gouache on canvas, 117x91cm.",
+  },
+  {
+    id: 2,
+    year: 2024,
+    src: soniaImage,
+    alt: "Sonia",
+    desc: "<Sonia>, 2024. Oil on canvas, 73x60cm.",
+  },
+  {
+    id: 3,
+    year: 2023,
+    src: riverImage,
+    alt: "River",
+    desc: "<River>, 2023. Oil on canvas, 91x91cm.",
+  },
 ];
 
 const CONTENT_ITEMS: ContentItem[] = [
@@ -42,6 +67,7 @@ export default function Masterpiece({
   activeFullpageIndex,
   setActiveFullpageIndex,
 }: MasterpieceProps) {
+  const [swiperActiveIdx, setSwiperActiveIdx] = useState(0);
   const handleItemClick = (index: number) => {
     setActiveFullpageIndex(index);
   };
@@ -86,6 +112,9 @@ export default function Masterpiece({
           modules={[Autoplay]}
           slidesPerView={1}
           className={styles.swiper}
+          onSlideChange={(swiper) => {
+            setSwiperActiveIdx(swiper.activeIndex);
+          }}
           autoplay={{
             delay: 3000,
             disableOnInteraction: false,
@@ -99,6 +128,9 @@ export default function Masterpiece({
                 alt={image.alt}
                 className={styles.image}
               />
+              <div className={styles.desc}>
+                {IMAGE_DATA[swiperActiveIdx].desc}
+              </div>
             </SwiperSlide>
           ))}
         </Swiper>

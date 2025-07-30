@@ -19,35 +19,162 @@ import treeImage from "@/assets/tree.webp";
 import watermelonImage from "@/assets/watermelon.webp";
 import windowImage from "@/assets/window.webp";
 import MobileImage from "@/components/mobileImage/mobileImage";
+import { useState } from "react";
 
 const IMAGE_DATA = [
-  { id: 1, src: areaImage, alt: "Area View" },
-  { id: 2, src: damnImage, alt: "Damn" },
-  { id: 3, src: fenceImage, alt: "Fence" },
-  { id: 4, src: flower1Image, alt: "Flower 1" },
-  { id: 5, src: flower2Image, alt: "Flower 2" },
-  { id: 6, src: forestImage, alt: "Forest" },
-  { id: 7, src: grandImage, alt: "Grand" },
-  { id: 8, src: riverImage, alt: "River" },
-  { id: 9, src: roomImage, alt: "Room" },
-  { id: 10, src: singImage, alt: "Sing" },
-  { id: 11, src: soniaImage, alt: "Sonia" },
-  { id: 12, src: spongeImage, alt: "Sponge" },
-  { id: 13, src: starsImage, alt: "Stars" },
-  { id: 14, src: stationImage, alt: "Station" },
-  { id: 15, src: streetImage, alt: "Street" },
-  { id: 16, src: treeImage, alt: "Tree" },
-  { id: 17, src: watermelonImage, alt: "Watermelon" },
-  { id: 18, src: windowImage, alt: "Window" },
+  {
+    id: 1,
+    year: 2023,
+    src: areaImage,
+    alt: "Area View",
+    desc: "<AREA VIDEOSORVEGLIATA>, 2023. Gouache on canvas, 130x162cm.",
+  },
+  {
+    id: 2,
+    year: 2025,
+    src: damnImage,
+    alt: "Damn",
+    desc: "<Damn these guys r so stylish> 2025. Oil on canvas, 117x73cm.",
+  },
+  {
+    id: 3,
+    year: 2024,
+    src: fenceImage,
+    alt: "Fence",
+    desc: "<Fence>, 2024. Oil on canvas, 73x117cm.",
+  },
+  {
+    id: 4,
+    year: 2025,
+    src: flower1Image,
+    alt: "Flower 1",
+    desc: "<花樣年華(화양연화)> 2025. Oil on canvas, 75x153cm.",
+  },
+  {
+    id: 5,
+    year: 2025,
+    src: flower2Image,
+    alt: "Flower 2",
+    desc: "<花樣年華(화양연화)> 2025. Oil on canvas, 33x24cm.",
+  },
+  {
+    id: 6,
+    year: 2023,
+    src: forestImage,
+    alt: "Forest",
+    desc: "<Forest>, 2023. Oil on canvas, 61x91cm.",
+  },
+  {
+    id: 7,
+    year: 2023,
+    src: grandImage,
+    alt: "Grand",
+    desc: "<Grand Cross>, 2023. Gouache on canvas, 117x91cm.",
+  },
+  {
+    id: 8,
+    year: 2023,
+    src: riverImage,
+    alt: "River",
+    desc: "<River>, 2023. Oil on canvas, 91x91cm.",
+  },
+  {
+    id: 9,
+    year: 2023,
+    src: roomImage,
+    alt: "Room",
+    desc: "<Room>, 2023. Oil on canvas, 117x91cm.",
+  },
+  {
+    id: 10,
+    year: 2024,
+    src: singImage,
+    alt: "Sing",
+    desc: "<가재가 노래하는 곳>, 2024. Oil on canvas, 71x159cm.",
+  },
+  {
+    id: 11,
+    year: 2024,
+    src: soniaImage,
+    alt: "Sonia",
+    desc: "<Sonia>, 2024. Oil on canvas, 73x60cm.",
+  },
+  {
+    id: 12,
+    year: 2023,
+    src: spongeImage,
+    alt: "Sponge",
+    desc: "<뚱이와 스폰지밥 (용맹한 발걸음)>, 2023. Oil on canvas, 24x33cm.",
+  },
+  {
+    id: 13,
+    year: 2024,
+    src: starsImage,
+    alt: "Stars",
+    desc: "<Stars>, 2024. Oil on canvas, 41x32cm.",
+  },
+  {
+    id: 14,
+    year: 2023,
+    src: stationImage,
+    alt: "Station",
+    desc: "<Station>, 2023. Gouache on canvas, 97x194cm.",
+  },
+  {
+    id: 15,
+    year: 2024,
+    src: streetImage,
+    alt: "Street",
+    desc: "<25th Street>, 2024. Oil on canvas, 117x91cm.",
+  },
+  {
+    id: 16,
+    year: 2024,
+    src: treeImage,
+    alt: "Tree",
+    desc: "<근데 저게 버드나무인지는 모르겠어.>, 2024. Oil on canvas, 65x53cm.",
+  },
+  {
+    id: 17,
+    year: 2023,
+    src: watermelonImage,
+    alt: "Watermelon",
+    desc: "<Smells Like Watermelon>, 2023. Oil on canvas, 65x53cm.",
+  },
+  {
+    id: 18,
+    year: 2024,
+    src: windowImage,
+    alt: "Window",
+    desc: "<Window>, 2024. Oil on canvas, 73x117cm.",
+  },
 ];
-//descripton이 추가되어야하고 같이 렌더되어야함.
+
+const TAB_ITEMS = [
+  {
+    id: 0,
+    title: "ALL",
+  },
+  {
+    id: 1,
+    title: "2023",
+  },
+  {
+    id: 2,
+    title: "2024",
+  },
+  {
+    id: 3,
+    title: "2025",
+  },
+];
 
 interface ImageItemProps {
   activeFullpageIndex: number;
 }
 
 export default function Works({ activeFullpageIndex }: ImageItemProps) {
-  console.log(activeFullpageIndex);
+  const [activeTab, setActiveTab] = useState(0);
   return (
     <div className={styles.wrapper}>
       <motion.div
@@ -63,6 +190,12 @@ export default function Works({ activeFullpageIndex }: ImageItemProps) {
         Works
       </motion.div>
 
+      <div className={styles.tab_wrapper}>
+        <div className={styles.tab_item}>
+          <div className={styles.tab_item_title}>Works</div>
+        </div>
+      </div>
+
       <motion.div
         className={styles.image_list}
         initial={{ opacity: 0 }}
@@ -72,6 +205,7 @@ export default function Works({ activeFullpageIndex }: ImageItemProps) {
         {IMAGE_DATA.map((image) => (
           <div key={image.id} className={styles.image_item}>
             <MobileImage src={image.src} alt={image.alt} />
+            <div className={styles.desc}>{image.desc}</div>
           </div>
         ))}
       </motion.div>

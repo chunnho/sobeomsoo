@@ -11,11 +11,22 @@
     color: $primary1;
   }
 
+  .tab_wrapper {
+    border: 1px solid red;
+  }
+
   & > .image_list {
     margin-top: 3.2rem;
     display: grid;
     grid-template-columns: 1fr;
     gap: 1.6rem;
     width: 100%;
+
+    .desc {
+      color: $primary2;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-top: 0.6rem;
+    }
   }
 }
