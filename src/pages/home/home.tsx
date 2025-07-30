@@ -27,10 +27,16 @@ function Home() {
           />
         </FullpageSection>
         <FullpageSection>
-          <Works activeFullpageIndex={activeFullpageIndex} />
+          <Works
+            activeFullpageIndex={activeFullpageIndex}
+            setActiveFullpageIndex={setActiveFullpageIndex}
+          />
         </FullpageSection>
         <FullpageSection>
-          <Exhibition activeFullpageIndex={activeFullpageIndex} />
+          <Exhibition
+            activeFullpageIndex={activeFullpageIndex}
+            setActiveFullpageIndex={setActiveFullpageIndex}
+          />
         </FullpageSection>
         <FullpageSection>
           <About />

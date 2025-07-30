@@ -31,7 +31,8 @@
       .category {
         width: fit-content;
 
-        & > p {
+        & > p,
+        & > a {
           line-height: 0.8rem;
           color: $primary2;
           font-size: 0.7rem;
@@ -41,6 +42,10 @@
           color: $primary1;
           font-size: 0.8rem;
           font-weight: 600;
+        }
+
+        a {
+          text-decoration: underline;
         }
       }
     }

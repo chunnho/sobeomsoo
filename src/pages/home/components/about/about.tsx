@@ -1,4 +1,4 @@
-import styles from './about.module.scss';
+import styles from "./about.module.scss";
 
 export default function About() {
   return (
@@ -33,7 +33,13 @@ export default function About() {
 
           <div className={styles.category}>
             <p className={styles.category_title}>Instagram</p>
-            <p>@sobeomsoo</p>
+            <a
+              href="https://www.instagram.com/sobeomsoo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              @sobeomsoo
+            </a>
           </div>
 
           <div className={styles.category}>

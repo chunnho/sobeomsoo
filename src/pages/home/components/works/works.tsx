@@ -180,9 +180,13 @@ const TAB_ITEMS: TabItem[] = [
 
 interface ImageItemProps {
   activeFullpageIndex: number;
+  setActiveFullpageIndex: (index: number) => void;
 }
 
-export default function Works({ activeFullpageIndex }: ImageItemProps) {
+export default function Works({
+  activeFullpageIndex,
+  setActiveFullpageIndex,
+}: ImageItemProps) {
   const [activeTab, setActiveTab] = useState(0);
   const currentImageList = IMAGE_DATA.filter((image) => {
     if (activeTab === 0) return true;
@@ -203,6 +207,15 @@ export default function Works({ activeFullpageIndex }: ImageItemProps) {
         onTabChange={setActiveTab}
         isVisible={activeFullpageIndex === 1}
       />
+
+      <motion.button
+        className={styles.scroll_to_bottom}
+        onClick={() => {
+          setActiveFullpageIndex(2);
+        }}
+      >
+        Move to Exhibition
+      </motion.button>
 
       <motion.div
         className={styles.image_list}
