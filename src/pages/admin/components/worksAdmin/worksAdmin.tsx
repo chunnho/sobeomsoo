@@ -33,16 +33,6 @@ const validationSchema = Yup.object({
     .required("Description is required")
     .min(10, "Description must be at least 10 characters")
     .max(500, "Description must be less than 500 characters"),
-  imageFile: Yup.mixed()
-    .required("Image file is required")
-    .test("fileSize", "File size must be less than 5MB", (value) => {
-      if (!value) return false;
-      return value.size <= 5 * 1024 * 1024;
-    })
-    .test("fileType", "Only image files are allowed", (value) => {
-      if (!value) return false;
-      return ["image/jpeg", "image/png", "image/webp"].includes(value.type);
-    }),
 });
 
 const initialValues: FormValues = {
@@ -65,7 +55,7 @@ export default function WorksAdmin() {
       try {
         setLoading(true);
         const response = await axios.get("/works");
-        
+
         // API 응답이 배열인지 확인하고 안전하게 처리
         const worksData = response.data;
         if (Array.isArray(worksData)) {
@@ -95,7 +85,10 @@ export default function WorksAdmin() {
     fetchWorks();
   }, []);
 
-  const handleSubmit = async (values: FormValues, { resetForm, setSubmitting }: any) => {
+  const handleSubmit = async (
+    values: FormValues,
+    { resetForm, setSubmitting }: any
+  ) => {
     setError("");
     setSuccess("");
     setLoading(true);
@@ -121,20 +114,24 @@ export default function WorksAdmin() {
           },
         });
 
-        const addResponse = await axios.post("/works", {
-          year: values.year,
-          imageUrl: uploadResponse.data.url,
-          alt: values.alt,
-          desc: values.desc,
-        }, {
-          headers: {
-            "Content-Type": "application/json",
+        const addResponse = await axios.post(
+          "/works",
+          {
+            year: values.year,
+            imageUrl: uploadResponse.data.url,
+            alt: values.alt,
+            desc: values.desc,
           },
-        });
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
 
         // API 응답에서 새로 추가된 work 데이터 추출
         const addedWork = addResponse.data;
-        if (addedWork && typeof addedWork === 'object') {
+        if (addedWork && typeof addedWork === "object") {
           setWorks((prev) => [...prev, addedWork]);
         } else {
           setWorks((prev) => [...prev, newWork]);
@@ -142,7 +139,9 @@ export default function WorksAdmin() {
       } catch (apiError) {
         // API가 없으면 로컬 상태만 업데이트
         setWorks((prev) => [...prev, newWork]);
-        setSuccess("Work added successfully! (Demo mode - not saved to server)");
+        setSuccess(
+          "Work added successfully! (Demo mode - not saved to server)"
+        );
       }
 
       resetForm();
@@ -165,7 +164,7 @@ export default function WorksAdmin() {
       } catch (apiError) {
         console.log("API not available, deleting locally only");
       }
-      
+
       setWorks((prev) => prev.filter((work) => work.id !== id));
       setSuccess("Work deleted successfully!");
     } catch (err: any) {
@@ -208,7 +207,11 @@ export default function WorksAdmin() {
                 min="1900"
                 max={new Date().getFullYear()}
               />
-              <ErrorMessage name="year" component="div" className={styles.error} />
+              <ErrorMessage
+                name="year"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -223,7 +226,11 @@ export default function WorksAdmin() {
                 }}
                 className={styles.fileInput}
               />
-              <ErrorMessage name="imageFile" component="div" className={styles.error} />
+              <ErrorMessage
+                name="imageFile"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -235,7 +242,11 @@ export default function WorksAdmin() {
                 placeholder="Enter alt text for the image"
                 className={styles.input}
               />
-              <ErrorMessage name="alt" component="div" className={styles.error} />
+              <ErrorMessage
+                name="alt"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <div className={styles.formGroup}>
@@ -247,7 +258,11 @@ export default function WorksAdmin() {
                 placeholder="Enter description"
                 className={styles.textarea}
               />
-              <ErrorMessage name="desc" component="div" className={styles.error} />
+              <ErrorMessage
+                name="desc"
+                component="div"
+                className={styles.error}
+              />
             </div>
 
             <button
@@ -270,10 +285,16 @@ export default function WorksAdmin() {
           {worksArray.map((work) => (
             <div key={work.id} className={styles.workCard}>
               <div className={styles.imageContainer}>
-                <img src={work.imageUrl} alt={work.alt} className={styles.workImage} />
+                <img
+                  src={work.imageUrl}
+                  alt={work.alt}
+                  className={styles.workImage}
+                />
               </div>
               <div className={styles.workInfo}>
-                <h3>{work.year} - {work.alt}</h3>
+                <h3>
+                  {work.year} - {work.alt}
+                </h3>
                 <p>{work.desc}</p>
                 <button
                   onClick={() => handleDelete(work.id)}
