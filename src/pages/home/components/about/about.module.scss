@@ -63,7 +63,30 @@
 
 @media (min-width: $desktop) {
   .wrapper {
-    padding-left: 30rem;
-    padding-right: 30rem;
+    padding-left: 50rem;
+    padding-right: 50rem;
+  }
+
+  .title {
+    font-size: 2.4rem !important;
+  }
+
+  .name,
+  .birthday {
+    width: 100% !important;
+    font-size: 1.2rem !important;
+    font-weight: 600;
+  }
+
+  p,
+  a {
+    width: 100% !important;
+    font-size: 1.2rem !important;
+    font-weight: 400;
+  }
+  .category_title {
+    width: 100% !important;
+    font-size: 1.4rem !important;
+    font-weight: 600;
   }
 }
